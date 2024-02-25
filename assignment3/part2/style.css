@@ -9,6 +9,7 @@ div{
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  line-height: 300px;
   font-size: 1.5rem; /*Center the text*/
   background-color: rgb(133, 0, 228);
   color: #ffffff;
