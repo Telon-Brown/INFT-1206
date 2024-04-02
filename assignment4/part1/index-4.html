@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Silly story generator</title>
+
+    <style>
+      body {
+        font-family: helvetica, sans-serif;
+        width: 350px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      div {
+        padding-bottom: 20px;
+      }
+
+      input[type="text"] {
+        padding: 5px;
+        width: 150px;
+      }
+
+      p {
+        background: #ffc125;
+        color: #5e2612;
+        padding: 10px;
+        visibility: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <label for="customname">Enter custom name:</label>
+      <input id="customname" type="text" placeholder="" />
+    </div>
+    <div>
+      <label for="us">US</label
+      ><input id="us" type="radio" name="ukus" value="us" checked />
+      <label for="uk">UK</label
+      ><input id="uk" type="radio" name="ukus" value="uk" />
+    </div>
+    <div>
+      <button class="randomize">Generate random story</button>
+    </div>
+    <!-- Thanks a lot to Willy Aguirre for his help with the code for this assessment -->
+    <p class="story"></p>
+  </body>
+</html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const customNameInput = document.getElementById('customname');
+    const usRadio = document.getElementById('us');
+    const ukRadio = document.getElementById('uk');
+    const storyParagraph = document.querySelector('.story');
+    const randomizeButton = document.querySelector('.randomize');
+
+    const storyTemplates = [
+      'It was a cold day in December, and Bob was walking in the park. He was approached by a squirrel who asked for some nuts. Bob gave the squirrel a handful of nuts and continued on his way.',
+      'Bob decided to bake a cake for his friend\'s birthday. He mixed flour, sugar, and eggs in a bowl. Suddenly, the cake started talking and asked Bob to stop mixing.',
+      'Bob went to the grocery store to buy some milk. He accidentally bumped into a stack of cans, causing them to fall. Everyone in the store started clapping, and Bob felt embarrassed.'
+    ];
+
+    function getRandomElement(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function generateStory() {
+      let story = getRandomElement(storyTemplates);
+
+      if (customNameInput.value.trim() !== '') {
+        const customName = customNameInput.value.trim();
+        story = story.replace(/Bob/g, customName);
+      }
+
+      if (ukRadio.checked) {
+        story = story.replace('cold', 'chilly');
+        story = story.replace('December', 'January');
+        story = story.replace('milk', 'tea');
+      }
+
+      storyParagraph.textContent = story;
+      storyParagraph.style.visibility = 'visible';
+    }
+
+    randomizeButton.addEventListener('click', generateStory);
+  });
+</script>
+
